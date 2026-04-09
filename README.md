@@ -24,9 +24,11 @@ Isso permite publicar a landing page com facilidade em hospedagens simples, CDN,
 ## Estrutura do projeto
 
 ```text
-Centro de Estetica/
+landing-page-clinica-estetica/
 |-- index.html
+|-- AGENTS.md
 |-- README.md
+|-- serve.ps1
 |-- styles/
 |   `-- main.css
 `-- scripts/
@@ -70,6 +72,7 @@ Centraliza os dados e textos reutilizáveis da página:
 
 - benefícios;
 - serviços;
+- jornada da primeira visita;
 - depoimentos;
 - blocos de autoridade;
 - FAQ;
@@ -104,18 +107,25 @@ Arquivo de configuração para integrações:
 
 ## Como rodar localmente
 
-Como o projeto é estático e usa módulos ES no navegador, o ideal é abrir com um servidor local.
+Como o projeto é estático e usa módulos ES no navegador, ele deve ser aberto com um servidor local.
+
+Importante:
+
+- não abra o `index.html` direto pelo explorador de arquivos;
+- rode o servidor na pasta raiz deste projeto;
+- se o servidor for iniciado na pasta pai errada, o navegador vai mostrar apenas uma listagem de diretório.
 
 ### Opção 1: Python
 
 ```powershell
-cd "C:\Users\Aluno\Downloads\Centro de Estetica"
+cd "C:\Users\Aluno\Downloads\Centro de Estetica\landing-page-clinica-estetica"
 py -m http.server 5500
 ```
 
 Se `py` não estiver disponível:
 
 ```powershell
+cd "C:\Users\Aluno\Downloads\Centro de Estetica\landing-page-clinica-estetica"
 python -m http.server 5500
 ```
 
@@ -123,7 +133,21 @@ Abra no navegador:
 
 - [http://localhost:5500](http://localhost:5500)
 
-### Opção 2: VS Code Live Server
+### Opção 2: script pronto do projeto
+
+Foi adicionado um script para evitar erro de pasta:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\serve.ps1
+```
+
+Para mudar a porta:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\serve.ps1 -Port 8080
+```
+
+### Opção 3: VS Code Live Server
 
 Se usar VS Code, também é possível abrir a pasta e rodar com Live Server.
 
@@ -133,7 +157,7 @@ Se usar VS Code, também é possível abrir a pasta e rodar com Live Server.
 
 Edite:
 
-- [scripts/site-data.js](C:/Users/Aluno/Downloads/Centro%20de%20Estetica/scripts/site-data.js)
+- `scripts/site-data.js`
 
 Lá você pode ajustar:
 
@@ -147,7 +171,7 @@ Lá você pode ajustar:
 
 Edite:
 
-- [scripts/config.js](C:/Users/Aluno/Downloads/Centro%20de%20Estetica/scripts/config.js)
+- `scripts/config.js`
 
 Exemplo:
 

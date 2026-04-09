@@ -3,6 +3,7 @@ import {
   business,
   benefits,
   services,
+  journeySteps,
   testimonials,
   authorityPoints,
   faqs
@@ -11,18 +12,21 @@ import {
   renderAuthorityPoint,
   renderBenefitCard,
   renderFaqItem,
+  renderJourneyStep,
   renderServiceCard,
   renderTestimonialCard
 } from "./components.js";
 
 const benefitsGrid = document.querySelector("#benefits-grid");
 const servicesGrid = document.querySelector("#services-grid");
+const journeyGrid = document.querySelector("#journey-grid");
 const testimonialsGrid = document.querySelector("#testimonials-grid");
 const authorityGrid = document.querySelector("#authority-grid");
 const faqList = document.querySelector("#faq-list");
 const leadForm = document.querySelector("#lead-form");
 const formStatus = document.querySelector("#form-status");
 const currentYear = document.querySelector("#current-year");
+const stickyCta = document.querySelector(".sticky-cta");
 
 const defaultWhatsAppMessage =
   "Olá! Quero agendar minha avaliação gratuita no Centro de Estética Katia Tiso.";
@@ -34,6 +38,10 @@ function renderSections() {
 
   if (servicesGrid) {
     servicesGrid.innerHTML = services.map(renderServiceCard).join("");
+  }
+
+  if (journeyGrid) {
+    journeyGrid.innerHTML = journeySteps.map(renderJourneyStep).join("");
   }
 
   if (testimonialsGrid) {
@@ -111,6 +119,40 @@ function openWhatsApp(payload) {
   window.open(buildWhatsAppUrl(message), "_blank", "noopener,noreferrer");
 }
 
+function formatPhone(value) {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+
+  if (digits.length <= 2) {
+    return digits;
+  }
+
+  if (digits.length <= 7) {
+    return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  }
+
+  if (digits.length <= 10) {
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  }
+
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
+function initPhoneMask() {
+  if (!leadForm) {
+    return;
+  }
+
+  const phoneInput = leadForm.elements.namedItem("phone");
+
+  if (!(phoneInput instanceof HTMLInputElement)) {
+    return;
+  }
+
+  phoneInput.addEventListener("input", () => {
+    phoneInput.value = formatPhone(phoneInput.value);
+  });
+}
+
 async function handleLeadSubmit(event) {
   event.preventDefault();
 
@@ -155,6 +197,28 @@ async function handleLeadSubmit(event) {
   }
 }
 
+function initFaqBehavior() {
+  if (!faqList) {
+    return;
+  }
+
+  const items = faqList.querySelectorAll(".faq-item");
+
+  items.forEach((item) => {
+    item.addEventListener("toggle", () => {
+      if (!item.open) {
+        return;
+      }
+
+      items.forEach((otherItem) => {
+        if (otherItem !== item) {
+          otherItem.open = false;
+        }
+      });
+    });
+  });
+}
+
 function initReveal() {
   const elements = document.querySelectorAll(".reveal");
 
@@ -179,9 +243,22 @@ function initReveal() {
   );
 
   elements.forEach((element, index) => {
-    element.style.setProperty("--delay", `${Math.min(index * 45, 220)}ms`);
+    element.style.setProperty("--delay", `${Math.min(index * 40, 220)}ms`);
     observer.observe(element);
   });
+}
+
+function initStickyCta() {
+  if (!stickyCta) {
+    return;
+  }
+
+  const updateState = () => {
+    document.body.classList.toggle("has-scrolled", window.scrollY > 220);
+  };
+
+  updateState();
+  window.addEventListener("scroll", updateState, { passive: true });
 }
 
 function setFooterYear() {
@@ -193,8 +270,11 @@ function setFooterYear() {
 renderSections();
 updateWhatsAppLinks();
 fillTrackingFields();
+initPhoneMask();
+initFaqBehavior();
 setFooterYear();
 initReveal();
+initStickyCta();
 
 if (leadForm) {
   leadForm.addEventListener("submit", handleLeadSubmit);
