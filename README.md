@@ -1,179 +1,127 @@
 # Centro de Estética Katia Tiso
 
-Landing page mobile-first focada em geração de leads para o Centro de Estética Katia Tiso, com ênfase em conversão via WhatsApp e formulário.
+Landing page premium, responsiva e orientada à conversão para o Centro de
+Estética Katia Tiso, em Santa Fé do Sul — SP.
 
-## Objetivo
+O projeto conduz a visitante da apresentação dos tratamentos até o atendimento
+no WhatsApp com clareza, baixo atrito e uma experiência mobile-first.
 
-Este projeto foi criado para:
+## Prévia
 
-- gerar agendamentos com o menor atrito possível;
-- destacar prova social, autoridade e benefícios percebidos;
-- funcionar bem em mobile, onde a maior parte dos acessos tende a acontecer;
-- manter uma base simples, rápida e fácil de evoluir.
+![Prévia da landing page do Centro de Estética Katia Tiso](./assets/landing-page-preview.png)
+
+## Destaques
+
+- hero editorial com proposta de valor e CTA principal acima da dobra;
+- tratamentos organizados por objetivo, facilitando a escolha inicial;
+- formulário com apenas duas seleções e sem coleta de dados pessoais;
+- mensagem de WhatsApp montada automaticamente com interesse e período;
+- CTA fixo no mobile após a primeira rolagem;
+- jornada de atendimento, pilares de confiança, localização e FAQ;
+- captura de parâmetros UTM para integrações futuras;
+- conteúdo renderizado progressivamente, sem depender de framework;
+- animações leves com suporte a `prefers-reduced-motion`;
+- SEO local e dados estruturados com Schema.org.
+
+## Estratégia de conversão
+
+O fluxo foi desenhado para reduzir dúvidas antes do contato:
+
+1. A visitante entende a proposta da clínica no hero.
+2. Conhece os tratamentos por objetivo, sem precisar decidir um protocolo.
+3. Seleciona o que deseja cuidar e o melhor período.
+4. Continua no WhatsApp com uma mensagem já preenchida.
+
+Quando não há endpoint configurado, todo o fluxo continua funcionando pelo
+WhatsApp. Caso um backend seja adicionado, o mesmo formulário também pode
+registrar o lead em uma API, CRM ou automação.
 
 ## Stack
 
-Projeto estático, sem dependências de build:
+Projeto estático e sem dependências de build:
 
-- `HTML` para estrutura;
-- `CSS` para layout, responsividade e identidade visual;
-- `JavaScript modular` para renderização de seções, CTAs e fluxo de lead.
+- HTML5 semântico;
+- CSS responsivo e mobile-first;
+- JavaScript com ES Modules;
+- Google Fonts;
+- integração com WhatsApp via `wa.me`;
+- mapa incorporado do Google Maps.
 
-Isso permite publicar a landing page com facilidade em hospedagens simples, CDN, servidor próprio ou integração futura com framework/backend.
-
-## Estrutura do projeto
+## Estrutura
 
 ```text
 landing-page-clinica-estetica/
-|-- index.html
-|-- AGENTS.md
-|-- README.md
-|-- serve.ps1
-|-- styles/
-|   `-- main.css
-`-- scripts/
-    |-- config.js
-    |-- components.js
-    |-- main.js
-    `-- site-data.js
+├── assets/
+│   └── landing-page-preview.png
+├── scripts/
+│   ├── components.js
+│   ├── config.js
+│   ├── main.js
+│   └── site-data.js
+├── styles/
+│   └── main.css
+├── AGENTS.md
+├── index.html
+├── README.md
+└── serve.ps1
 ```
 
-## Arquivos principais
+### Arquivos principais
 
-### `index.html`
+| Arquivo | Responsabilidade |
+| --- | --- |
+| `index.html` | Estrutura, SEO, conteúdo institucional e formulário |
+| `styles/main.css` | Identidade visual, layout, responsividade e animações |
+| `scripts/site-data.js` | Tratamentos, jornada, diferenciais e perguntas frequentes |
+| `scripts/components.js` | Templates dos componentes renderizados por JavaScript |
+| `scripts/main.js` | Renderização, WhatsApp, formulário, UTM, FAQ e microinterações |
+| `scripts/config.js` | Número do WhatsApp e configuração opcional de backend |
 
-Contém a estrutura base da landing page e as seções principais:
+## Como executar
 
-- hero;
-- benefícios;
-- serviços;
-- prova social;
-- autoridade;
-- oferta;
-- CTA;
-- localização;
-- FAQ;
-- rodapé.
+O site usa módulos ES e deve ser servido por HTTP. Não abra o `index.html`
+diretamente com `file://`, pois o navegador pode bloquear os módulos.
 
-### `styles/main.css`
+### Script do projeto
 
-Responsável por:
-
-- identidade visual;
-- tipografia;
-- layout responsivo;
-- estados de botão e formulário;
-- CTA fixo no mobile;
-- animações leves de entrada.
-
-### `scripts/site-data.js`
-
-Centraliza os dados e textos reutilizáveis da página:
-
-- benefícios;
-- serviços;
-- jornada da primeira visita;
-- depoimentos;
-- blocos de autoridade;
-- FAQ;
-- informações do negócio.
-
-Esse é o principal arquivo para ajustes de copy sem mexer na estrutura.
-
-### `scripts/components.js`
-
-Renderiza os blocos dinâmicos da página a partir dos dados centralizados.
-
-### `scripts/main.js`
-
-Controla:
-
-- renderização das seções;
-- links dinâmicos de WhatsApp;
-- captura de parâmetros UTM;
-- envio do formulário;
-- fallback para WhatsApp;
-- animações de reveal;
-- atualização do ano no rodapé.
-
-### `scripts/config.js`
-
-Arquivo de configuração para integrações:
-
-- número de WhatsApp;
-- endpoint de leads;
-- método de envio;
-- headers da requisição.
-
-## Como rodar localmente
-
-Como o projeto é estático e usa módulos ES no navegador, ele deve ser aberto com um servidor local.
-
-Importante:
-
-- não abra o `index.html` direto pelo explorador de arquivos;
-- rode o servidor na pasta raiz deste projeto;
-- se o servidor for iniciado na pasta pai errada, o navegador vai mostrar apenas uma listagem de diretório.
-
-### Opção 1: Python
-
-```powershell
-cd "C:\Users\Aluno\Downloads\Centro de Estetica\landing-page-clinica-estetica"
-py -m http.server 5500
-```
-
-Se `py` não estiver disponível:
-
-```powershell
-cd "C:\Users\Aluno\Downloads\Centro de Estetica\landing-page-clinica-estetica"
-python -m http.server 5500
-```
-
-Abra no navegador:
-
-- [http://localhost:5500](http://localhost:5500)
-
-### Opção 2: script pronto do projeto
-
-Foi adicionado um script para evitar erro de pasta:
+Na raiz do repositório:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\serve.ps1
 ```
 
-Para mudar a porta:
+Depois, acesse [http://localhost:5500](http://localhost:5500).
+
+Para usar outra porta:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\serve.ps1 -Port 8080
 ```
 
-### Opção 3: VS Code Live Server
+### Servidor do Python
 
-Se usar VS Code, também é possível abrir a pasta e rodar com Live Server.
+```powershell
+python -m http.server 5500
+```
 
-## Como personalizar
+Também é possível utilizar extensões como Live Server.
 
-### 1. Alterar textos e conteúdos
+## Personalização
 
-Edite:
+### Conteúdo e tratamentos
 
-- `scripts/site-data.js`
+Edite `scripts/site-data.js` para alterar:
 
-Lá você pode ajustar:
+- serviços e destaques;
+- etapas da experiência;
+- pilares de confiança;
+- argumentos de autoridade;
+- perguntas frequentes.
 
-- benefícios;
-- descrições dos serviços;
-- depoimentos;
-- FAQ;
-- dados do negócio.
+### WhatsApp
 
-### 2. Alterar número do WhatsApp
-
-Edite:
-
-- `scripts/config.js`
-
-Exemplo:
+O número é configurado em `scripts/config.js` no formato internacional, sem
+espaços ou símbolos:
 
 ```js
 export const leadConfig = {
@@ -186,23 +134,17 @@ export const leadConfig = {
 };
 ```
 
-O número deve seguir o formato internacional, sem espaços ou símbolos.
+Os textos específicos de cada CTA ficam nos atributos `data-message` do HTML e
+nos objetos de serviço em `scripts/site-data.js`.
 
-### 3. Integrar com backend
+### Integração com backend
 
-Para enviar o lead para API, CRM ou automação:
-
-1. configure `leadEndpoint` em `scripts/config.js`;
-2. mantenha `requestMethod` e `requestHeaders` conforme o backend exigir;
-3. ajuste a função de envio em `scripts/main.js`, se o payload precisar de outro formato.
-
-Payload enviado atualmente:
+Defina `leadEndpoint` para registrar o contato em uma API ou CRM. O payload
+atual segue este formato:
 
 ```json
 {
-  "name": "Nome da cliente",
-  "phone": "(17) 99999-9999",
-  "interest": "Limpeza de pele",
+  "interest": "Tratamentos faciais",
   "schedule": "Tarde",
   "utm_source": "",
   "utm_medium": "",
@@ -211,61 +153,50 @@ Payload enviado atualmente:
   "utm_term": "",
   "source": "landing-page",
   "businessName": "Centro de Estética Katia Tiso",
-  "sentAt": "2026-04-08T00:00:00.000Z"
+  "sentAt": "2026-08-03T12:00:00.000Z"
 }
 ```
 
-Se não houver backend configurado, o projeto continua funcionando com fallback para WhatsApp.
+O WhatsApp é aberto antes da chamada opcional ao backend, evitando que uma
+falha externa impeça o contato.
 
-## Estratégia de conversão usada
+### Imagens
 
-A landing page foi pensada para maximizar ação rápida:
+As imagens editoriais são carregadas pelo Unsplash. Para produção, recomenda-se
+substituí-las por fotos reais da clínica, equipe e procedimentos e hospedá-las
+localmente em formatos otimizados como WebP ou AVIF.
 
-- headline focada em transformação;
-- prova social visível logo no início;
-- CTA repetido ao longo da página;
-- botão fixo no mobile;
-- formulário curto;
-- serviços com promessa de benefício e resultado esperado;
-- FAQ para reduzir objeções;
-- localização e confiança no fim da jornada.
+## Acessibilidade e experiência
 
-## Responsividade
+- link para pular diretamente ao conteúdo;
+- marcação semântica e hierarquia de títulos;
+- foco visível em controles interativos;
+- áreas de toque adequadas para celular;
+- formulário associado a rótulos e validação nativa;
+- mensagens de status com `aria-live`;
+- respeito à preferência de movimento reduzido;
+- navegação e CTAs utilizáveis por teclado.
 
-O projeto foi desenhado com prioridade para mobile:
+## Performance
 
-- layout em coluna nas larguras menores;
-- CTAs destacados;
-- barra fixa inferior para ação imediata;
-- grids que escalam para tablet e desktop;
-- espaçamentos e tipografia ajustados por breakpoint.
+- sem framework ou bundle de JavaScript;
+- scripts organizados em módulos nativos;
+- imagens abaixo da dobra com carregamento tardio;
+- mapa carregado com `loading="lazy"`;
+- animações baseadas em `IntersectionObserver`;
+- componentes renderizados a partir de dados centralizados.
 
-## Checklist antes de publicar
+## Checklist de publicação
 
-- revisar textos finais e tom de voz;
-- substituir imagens, se desejar usar fotos reais da clínica;
-- validar número de WhatsApp;
-- testar links de CTA;
-- testar formulário em celular real;
-- configurar backend, se necessário;
-- validar carregamento em 4G;
-- revisar SEO básico e metadados.
-
-## Próximas melhorias recomendadas
-
-- otimização avançada de mobile UX;
-- compressão e local hosting das imagens;
-- integração com CRM ou webhook;
-- eventos de analytics para cliques e envio de lead;
-- testes A/B de hero e formulário;
-- página de agradecimento ou evento de conversão.
-
-## Observações
-
-- O projeto não usa `npm`, `build` ou framework por padrão.
-- A estrutura foi organizada para facilitar futura migração para React, Next.js ou outro stack, se necessário.
-- Os depoimentos atuais são ilustrativos e devem ser substituídos por avaliações reais aprovadas pelo negócio, se forem para produção.
+- [ ] substituir as imagens editoriais por fotos aprovadas da clínica;
+- [ ] confirmar telefone, endereço, tratamentos e textos finais;
+- [ ] testar o fluxo completo em um celular real;
+- [ ] revisar a mensagem de cada CTA do WhatsApp;
+- [ ] comprimir e hospedar as imagens localmente;
+- [ ] configurar analytics e eventos de conversão;
+- [ ] configurar o endpoint de leads, se necessário;
+- [ ] validar SEO, acessibilidade e desempenho após a publicação.
 
 ## Licença
 
-Uso interno e comercial conforme necessidade do projeto.
+Uso interno e comercial conforme a necessidade do projeto.
