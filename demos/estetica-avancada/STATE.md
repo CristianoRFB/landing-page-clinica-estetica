@@ -1,0 +1,2 @@
+# Demo independente — estética avançada
+Objetivo: catálogo, jornada de avaliação e mentoria, agenda e edição local, apresentação separada. Base bd5f950; zero alteração na main ou na clínica existente. Issues/PRs abertos consultados: 0/0. Dados sintéticos, sem envio ou prontuário. RFB Method: governança, anti-vibecoding, anti-loop, UX, QA, segurança. Estado: IN_PROGRESS. Gatilho de publicação: Worker novo isolado, sem bindings. QA de navegador obrigatório antes de declarar aceite.
