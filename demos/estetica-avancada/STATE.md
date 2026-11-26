@@ -9,3 +9,6 @@ Governança: Issues e PRs abertos 0/0 antes; PR aberto 0 após. Sem merge. Branc
 Próximo: testar rotas e fluxo edição -> cliente -> solicitação -> gestão e revisão desktop/mobile. Rollback: redeploy do commit anterior apenas no Worker isolado, sem alterações na main.
 
 QA adicional: captura 1280x900 da rota /gestao?qa=2 renderizada e inspecionada, catálogo, indicadores e agenda visíveis. Proposta: tentativa posterior retornou 429; não declarar render validado. Fluxos E2E continuam NOT_RUN.
+
+## Rodada 2026-11-26 — proposta e CTA mobile
+Baseline: 237314c. CTA: 3923200, visibilidade com margem de histerese, requestAnimationFrame e ocultação próxima ao formulário. Proposta: 541623e, dois comparativos SVG com detalhes expansíveis e filtro de diferenças. QA: captura fullPage 390x844 confirmou renderização de ambos os quadros sem overflow horizontal aparente. Correção após QA: b023ed1, título exato e botões alinhados. Deploy 262e86d960a74e5c83168a3c1cd4471d confirmado. Sintaxe JS PASS. Interações, rolagem Android e reteste visual do último patch NOT_RUN. Não declarar aceite integral. Issues/PRs 0/0 na entrada. Main intacta.
